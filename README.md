@@ -4,8 +4,8 @@
 ## 目录结构：
 ### 1.Android文件夹：android原生代码文件夹，使用android studio打开RN项目：file-open选中RN项目中的android目录点击打开，如果集成了react-native-config这个库，可能会报某个arg为null的错误，此时需要修复node_module中react-native-config/android/dotenv.gradle中getCurrentFlavor函数需要替换成下面这样的：
 >
-
-> def getCurrentFlavor() {
+```gradle
+def getCurrentFlavor() {
 	Gradle gradle = getGradle()
 	String tskReqStr = gradle.getStartParameter().getTaskRequests().toString()
 	Pattern pattern = Pattern.compile("(assemble|generate|install)(.*?)(Debug|Release)")
@@ -18,7 +18,7 @@
 	    return "";
 	}
 }
-
+```
 
 >
 > 改了之后sync一下就可以在as上跑RN了，为啥要这样改具体原因不是很清楚。
